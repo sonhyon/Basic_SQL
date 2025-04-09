@@ -1,0 +1,32 @@
+create database doitsql; #데이터베이스 생성
+use doitsql;
+
+create table doit_create_table (
+col_1 int,
+col_2 varchar(50),
+col_3 datetime);
+
+create table doit_dml (
+col_1 int,
+col_2 varchar(50),
+col_3 datetime);
+insert into doit_dml (col_1, col_2, col_3) values (1, 'doitsql', '2023-01-01');
+insert into doit_dml (col_1, col_3, col_2) values (4, '2023-01-03', '열순서 변경');
+
+select * from doit_dml;
+/*
+
+insert into doit_dml values (2, '열 이름 생략', '2023-01-02');
+insert into doit_dml (col_1, col_2) values (3, 'col_3 값 생략');
+*/
+update doit_dml set col_2 = '데이터 수정'
+where col_1 = 4;
+
+update doit_dml set col_1 = col_1 + 10;
+
+
+delete from doit_dml where col_1 = 14;
+
+delete from doit_dml;
+
+truncate table doit_dml;
