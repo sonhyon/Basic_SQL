@@ -38,3 +38,53 @@ HAVING RATING = 'G'; #HAVING은 GROUP BY와 세트
 
 #DISTINCT 문으로 중복된 데이터 제거하기
 SELECT DISTINCT SPECIAL_FEATURES, RATING FROM FILM; #중복 제거하기
+
+#────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#[테이블 생성 및 조작하기]
+CREATE DATABASE "데이터베이스명" #데이터베이스 만들기
+
+#AUTO_INCREMENT로 데이터 자동 입력하기
+USE DOITSQL;
+
+CREATE TABLE DOIT_INCREMENT( #테이블 만들기
+COL_1 INT AUTO_INCREMENT PRIMARY KEY, #AUTO_INVREMENT는 자동으로 값이 증가함
+COL_2 VARCHAR(50),
+COL_3 INT
+);
+
+INSERT INTO DOIT_INCREMENT (COL_2, COL_3) VALUES ('1 자동입력', 1); #데이터 입력 -> INSERT INTO, VALUES
+INSERT INTO DOIT_INCREMENT (COL_2, COL_3) VALUES ('2 자동입력', 2);
+
+SELECT * FROM DOIT_INCREMENT;
+
+SELECT LAST_INSERT_ID(); #AUTO_INCREMENT가 적용된 열의 마지막 데이터 조회
+ALTER TABLE DOIT_INCREMENT=100; #자동으로 입력하는 값을 100부터 시작
+SET @@AUTO_INCREMENT_INCREMENT=5; #자동으로 입력되는 값을 5로 설정
+
+#[조회 결과를 테이블에 입력하기]
+
+#조회 결과를 다른 테이블에 입력
+INSERT INTO DOIT_INSERT_SELECT_TO 
+SELECT * FROM DOIT_INSERT_SELECT_FROM
+
+SELECT * FROM DOIT_INSERT_SELECT_TO
+
+#새 테이블에 조회 결과 입력하기
+CREATE TABLE DOIT_SELECT_NEW AS (SELECT * FROM DOIT_INSERT_SELECT_FROM);
+SELECT * FROM DOIT_SELECT_NEW;
+
+#외래키로 연결되엉 있는 테이블에 데이터 입력 및 삭제하기
+CREATE TABLE DOIT_PARENT (COL_1 INT PRIMARY KEY);
+CREATE TABLE DOIT_CHILD (COL_1 INT);
+
+ALTER TABLE DOIT_CHILD #자식테이블이 부모테이블을 참조한다는 것을 명시
+ADD FOREHIN KEY (COL_1) REFERENCES DOIT_PARENT(COL_1) 
+#1. 부모 테이블에 없는 데이터를 자식 테이블에 입력 못함
+#2. 자식 테이블에도 있는 데이터를 부모 테이블에서 단독으로 삭제 못함
+#3. 부모 테이블을 삭제하더라도 먼저 자식 테이블을 삭제해야 함(제약 조건 삭제 후 부모 테이블을 삭제)
+ALTER TABLE DOIT_CHILD
+DROP CONSTRAINT DOIT_CHILD_IBFK_1; #제약조건 제거
+DROP TABLE DOIT_PARENT;
+
+SET FOREIGN_KEY_CHECKS=0 #외래키 비활성
+SET FOREIGN_KEY_CHECKS=1 #외래키 활성
