@@ -39,7 +39,6 @@ HAVING RATING = 'G'; #HAVING은 GROUP BY와 세트
 #DISTINCT 문으로 중복된 데이터 제거하기
 SELECT DISTINCT SPECIAL_FEATURES, RATING FROM FILM; #중복 제거하기
 
-#────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #[테이블 생성 및 조작하기]
 CREATE DATABASE "데이터베이스명" #데이터베이스 만들기
 
@@ -88,3 +87,11 @@ DROP TABLE DOIT_PARENT;
 
 SET FOREIGN_KEY_CHECKS=0 #외래키 비활성
 SET FOREIGN_KEY_CHECKS=1 #외래키 활성
+
+#숫자형
+정수형: TINYINT, SMALLINT, MEDINUMINT, INT, BIGINT
+실수형: FLOAT, DOUBLE
+#문자형
+CHAR(n), VARCHAR(n), BINARY(n), VARBINARY(n)
+#날짜형 및 시간형
+TIME, DATE, DATETIME, TIMESTAMP
