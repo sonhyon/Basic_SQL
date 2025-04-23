@@ -136,4 +136,12 @@ SELECT A.FILM_ID, (SELECT C.NAME
                    WHERE A.FILM_ID = B.FILM_ID) AS NAME
 FROM FILM AS A
 WHERE A.FILM_ID > 10 AND A.FILM_ID < 20;
-                    
+
+#[공통 테이블 표현식]
+#일반 CTE : 임시 결과셋을 만들어서 메인 쿼리에서 재사용할 수 있게 해주는 문법
+WITH avg_score AS (
+  SELECT AVG(score) AS avg FROM students
+)
+SELECT name, score
+FROM students, avg_score
+WHERE students.score > avg_score.avg;
