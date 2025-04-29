@@ -25,3 +25,20 @@ FROM DOIT_NULL WHERE COL_1 = 1;
 
 SELECT COL_1, COALESCE(COL_2, COL_3, COL_4, COL_5) #COALESCE함수는 차례대로 NULL이 없는 데이터로 대체함. 마지막 인자에도 NULL이 있는 경우는 결국 NULL을 반환
 FROM DOIT_NULL WHERE COL_1 = 2;
+
+#소문자 혹은 대문자로 변경하는 함수 - LOWER, UPPER
+SELECT 'Do it! SQL', LOWER('Do it! SQL'), UPPER('Do it! SQL');
+
+#공백을 제거하는 함수 - LTRIM, RTRIM, TRIM
+LTRIM 함수로 왼쪽 공백 제거
+RTRIM 함수로 오른쪽 공백 제거
+TRIM 함수로 양쪽 공백 제거
+SELECT TRIM(BOTH '#' FROM '#    Do it! MySQL    #); #TRIM 함수수로 양쪽 문자 제거
+
+#문자열 크기 또는 개수를 반환하는 함수 - LENGTH, CHAR_LENGTH
+SELECT LENGTH('Do it! MySQL'), LENGTH('두잇 마이에스큐엘'):
+CHAR_LENGTH('Do it! MySQL'), CHAR_LENGTH('두잇 마이에스큐엘');
+
+#특정 문자까지의 문자열 길이를 반환하는 함수
+SELECT 'Do it!! SQL', POSITTION('!' IN 'Do it!! MySQL'); # !까지해서 문자열 길이를 구하기
+SELECT 'Do it!! SQL', POSITION('#' IN 'Do it!! MySQL'); #탐색 문자가 없는 경우 0을 반환
