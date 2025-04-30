@@ -42,3 +42,8 @@ CHAR_LENGTH('Do it! MySQL'), CHAR_LENGTH('두잇 마이에스큐엘');
 #특정 문자까지의 문자열 길이를 반환하는 함수
 SELECT 'Do it!! SQL', POSITTION('!' IN 'Do it!! MySQL'); # !까지해서 문자열 길이를 구하기
 SELECT 'Do it!! SQL', POSITION('#' IN 'Do it!! MySQL'); #탐색 문자가 없는 경우 0을 반환
+
+#지정한 범위의 문자열을 반환하는 함수 - SUBSTRING
+SELECT 'Do it MySQL', SUBSTRING('Do it! MySQL', 4, 2);
+SELECT FIRST_NAME, SBUSTRING(FIRST_NAE, 2, 3) FROM CUSTOMER; #열 이름 전달
+SELECT SUBSTRING('abc@email.com', 1, POSIITION('@' IN 'abc@email.com') - 1); #SUBSTRING과 POSITOIN 함수 조합
