@@ -47,3 +47,7 @@ SELECT 'Do it!! SQL', POSITION('#' IN 'Do it!! MySQL'); #탐색 문자가 없는
 SELECT 'Do it MySQL', SUBSTRING('Do it! MySQL', 4, 2);
 SELECT FIRST_NAME, SBUSTRING(FIRST_NAE, 2, 3) FROM CUSTOMER; #열 이름 전달
 SELECT SUBSTRING('abc@email.com', 1, POSIITION('@' IN 'abc@email.com') - 1); #SUBSTRING과 POSITOIN 함수 조합
+
+#특정 문자를 다른 문자로 대체하는 함수 - REPLACE
+SELECT FIRST_NAME, REPLACE(FIRST_NAME, 'A', 'C')
+FROM CUSTOMER WHERE FIRST_NAME LIKE 'A%';
