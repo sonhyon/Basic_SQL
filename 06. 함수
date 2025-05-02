@@ -39,7 +39,7 @@ SELECT TRIM(BOTH '#' FROM '#    Do it! MySQL    #); #TRIM 함수수로 양쪽 �
 SELECT LENGTH('Do it! MySQL'), LENGTH('두잇 마이에스큐엘'):
 CHAR_LENGTH('Do it! MySQL'), CHAR_LENGTH('두잇 마이에스큐엘');
 
-#특정 문자까지의 문자열 길이를 반환하는 함수
+#특정 문자까지의 문자열 길이를 반환하는 함수 - POSITTION
 SELECT 'Do it!! SQL', POSITTION('!' IN 'Do it!! MySQL'); # !까지해서 문자열 길이를 구하기
 SELECT 'Do it!! SQL', POSITION('#' IN 'Do it!! MySQL'); #탐색 문자가 없는 경우 0을 반환
 
