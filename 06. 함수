@@ -63,3 +63,37 @@ SELECT 'Do it! MySQL', REVERSE('Do it! MySQL');
 
 #문자열을 비교하는 함수 - STRCMP
 SELECT STRCMP('Do it! MySQL', 'Do it! MySQL'); #비교하는 두 문자열이 동일한 경우 0을, 다를 경우 -1로 반환한다
+
+
+#[날짜 함수]
+#서버의 현재 날짜나 시간을 반환하는 다양한 함수
+SELECT CURRENT_DATE(), CURRENT_TIME(), CURRENT_TIMESTAMP(), NOW();
+SELECT CURRENT_DATE(), CURRENT_TIME(3), CURRENT_TIMESTAMP(3), NOW(3); #3부터 6까지 추가하여 시간을 좀 더 정밀히 확인가능
+SELECT CURRENT_TIMESTAMP(3), UTC_DATE(), UTC_TIME(3), UTC_TIMESTAMP(3); #세계 표준 날짜나 시간 반환
+
+#날짜를 더하거나 빼는 함수 - DATE_ADD, DATE_SUB
+SELECT NOW(), DATE_ADD(NOW(), INTERVAL 1 YEAR); #DATE_ADD 함수로 1년 증가한 날짜 반환
+SELECT NOW(), DATE_ADD(NOW(), INTERVAL -1 YEAR); #1년 감소한 날짜 반환
+SELECT NOW(), DAT_SUB(NOW(), INTERVAL 1 YEAR), DATE_SUB(NOW(), INTERVAL -1 YEAR); #DATE SUB은 DATEA_ADD와 반대
+
+#날짜 간 차이를 구하는 함수 - DATEDIFF, TIMESTAMPDIFF
+SELECT DATEDIFF('2023-12-31 23:59:59.9999999', '2023-01-01 00:00:00.0000000'); #DATEDIFF ㅎ마수로 날짜 간의 일수 차 반환
+SELECT TIMESTAMPDIFF(MONTH, '2023-12-31 23:59:59.9999999', '2023-01-01 00:00:00.0000000'); #TIMESTAMPDIFF 함수로 날짜 간의 개월 수 차 반환
+
+#지정한 날짜의 요일을 반환하는 함수 - DAYNAME
+SELECT DAYNAME('2023-08-20'); #DAYNAME ㅎ마수로 특정 날짜의 요일 반환
+
+#날짜에서 연,월,주,일을 값으로 가져오는 함수 - YEAR, MONTH, WEEK, DAY
+SELECT 
+  YEAR('2023-08-20'),
+  MONTH('2023-08-20'),
+  WEEK('2023-08-20'),
+  DAY('2023-08-20');
+
+#날짜 형식을 반환하는 함수 - DATE_FORMAT, GET_FORMAT
+SELECT DATE_FORMAT('2023-08-20 20:23:01', '%m/%d/%Y); 
+SELECT DATE_FORMAT('2023-08-20 20:23:01', '%Y%m%d')#연,월,일
+SELECT DATE_FORMAT('2023-08-20 20:23:01', '%Y.%m.%d'): #날짜 구분자를 변경해 출력
+SELECT DATE_FORMAT('2023-08-20 20:23:01', '%H:%i:%s'); #시,분,초
+
+#GET_FORMAT 함수로 국가나 지역별 날짜 형식 확인
