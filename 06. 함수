@@ -97,3 +97,10 @@ SELECT DATE_FORMAT('2023-08-20 20:23:01', '%Y.%m.%d'): #날짜 구분자를 변�
 SELECT DATE_FORMAT('2023-08-20 20:23:01', '%H:%i:%s'); #시,분,초
 
 #GET_FORMAT 함수로 국가나 지역별 날짜 형식 확인
+
+#조건에 맞는 데이터 개수를 세는 함수 - COUNT
+SELECT COUNT(*) FROM CUSTOMER;
+SELECT STORE_ID, COUNT(*) AS CNT FROM CUSTOMER GROUP BY STORE_ID;
+SELECT STORE_ID, ACTIVE, COUNT(*) AS CNT FROM CUSTOMER GROUP BY STORE_ID, ACTIVE;
+SELECT COUNT(*) AS ALL_CNT, COUNT(ADDRESS2) AS EX_NULL FROM ADDRESS; #ADDRESS2 열의 NULL은 COUNT 함수의 집계 대상이 아니므로 NULL을 제외 후 개수를 집계
+SELECT COUNT(*), COUNT(STORE_ID), COUNT(DISTINCT STORE_ID) FROM CUSTOMER; #DISTINCT문을 조합하면 중복된 값을 제외후 개수를 집계
