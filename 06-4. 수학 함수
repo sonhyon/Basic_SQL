@@ -1,0 +1,38 @@
+#절대값을 구하는 함수 - ABS
+SELECT ABS(-1.0), ABS(0.0), ABS(1.0);
+
+#양수 또는 음수 여부를 판단하는 함수 - SIGN
+*양수, 음수, 0 : 1, -1, 0을 반환
+SELECT SIGN(-256), SIGN(0), SIGN(256);
+
+#천장값과 바닥값을 구하는 함수 - CEILING, FLOOR
+SELECT CEILING(2.4), CEILING(-2.4), CEILING(0.0);
+SELECT FLOOR(2.4), FLOOR(-2.4), FLOOR(0.0);
+
+#반올림을 반환하는 함수 - ROUND
+SELECT ROUND(99.9994, 3), ROUND(99.9995, 3);
+SELECT ROUND(234.4545, 2), ROUND(234.4545, -2);
+
+#로그를 구하는 함수 - LOG
+SELECT LOG(10);
+SELECT LOG(10, 5);
+
+#e의 n 제곱값을 구하는 함수 - EXP
+SELECT EXP(1.0);
+SELECT EXP(10);
+SELECT EXP(LOG(20), LOG(EXP(20));
+
+#거듭제곱값을 구하는 함수
+SELECT POWER(2,3), POWER(2,10), POWER(2.0,3);
+
+#제곱근을 구하는 함수 - SQRT
+SELECT SQRT(1.00), SQRT(10.00);
+
+#난수를 구하는 함수 - RAND
+SELECT RAND(100), RAND(), RAND();
+
+#삼각함수 - COS, SIN, TAN, ATAN
+SELECT COS(14.78);
+SELECT SIN(45.175643);
+SELECT TAN(PI()/2), TAN(.45)
+SELECT ATAN(45.87)
