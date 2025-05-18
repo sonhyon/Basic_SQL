@@ -286,3 +286,23 @@ DROP INDEX IX_DOIT_NONCLUSTERINDEX_1_3 ON DOIT_NONCLUSTERINDEX;
 
 SHOW INDEX FROM DOIT_NONCLUSTERINDEX;
 
+
+[뷰]
+뷰(View)는 데이터베이스에 존재하는 가상의 테이블 (종류: 단일뷰, 복합뷰)
+
+장점: 복잡한 쿼리를 단축, 보안성 우수
+단점: 한 번 정의된 뷰는 변경x, 제한 사항이 있음, 인덱스 가질 수 없다
+
+#뷰 생성 및 조회하기
+1. 뷰 생성 기본 형식
+CREATE VIEW 뷰 이름
+AS
+  <SELECT 문>
+
+CREATE VIEW V_CUSTOMER
+AS
+  SELECT FIRST_NAME, LAST_NAME, EMAIL FROM CUSTOMER;
+SELECT * FROM V_CUSTOMER;
+
+2.
+
