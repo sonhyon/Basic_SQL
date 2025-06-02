@@ -1,0 +1,60 @@
+✅ 1. 현재 날짜 및 시간 확인 함수
+SELECT 
+  CURRENT_DATE(),         -- 현재 날짜 (YYYY-MM-DD)
+  CURRENT_TIME(),         -- 현재 시간 (HH:MM:SS)
+  CURRENT_TIMESTAMP(),    -- 현재 날짜와 시간
+  NOW();                  -- CURRENT_TIMESTAMP()와 동일
+
+정밀도 조절 (0~6자리까지 밀리초 출력)
+SELECT 
+  CURRENT_TIME(3),        -- 밀리초 포함된 현재 시간
+  CURRENT_TIMESTAMP(6),   -- 밀리초 포함된 현재 타임스탬프
+  NOW(6);                 -- NOW()에 밀리초 포함
+
+UTC(협정 세계시) 기준
+SELECT 
+  UTC_DATE(),             -- UTC 기준 날짜
+  UTC_TIME(3),            -- UTC 기준 시간 (밀리초 포함)
+  UTC_TIMESTAMP(3);       -- UTC 기준 타임스탬프
+
+✅ 2. 날짜 더하기 / 빼기 - DATE_ADD, DATE_SUB
+SELECT 
+  NOW(), 
+  DATE_ADD(NOW(), INTERVAL 1 YEAR);   -- 1년 뒤
+
+SELECT 
+  NOW(), 
+  DATE_SUB(NOW(), INTERVAL 1 YEAR);   -- 1년 전
+
+✅ 3. 날짜 차이 계산 - DATEDIFF, TIMESTAMPDIFF
+-- 일(day) 단위 차이
+SELECT DATEDIFF('2023-12-31', '2023-01-01');  -- 결과: 364
+
+-- 월(month) 단위 차이
+SELECT TIMESTAMPDIFF(MONTH, '2023-01-01', '2023-12-31');  -- 결과: 11
+
+📝 DATEDIFF는 일 단위만 가능, TIMESTAMPDIFF는 YEAR, MONTH, DAY 등 단위 지정 가능
+
+✅ 4. 요일 확인 - DAYNAME
+SELECT DAYNAME('2023-08-20');  -- 결과: 'Sunday'
+
+✅ 5. 연, 월, 주, 일 추출 - YEAR, MONTH, WEEK, DAY
+SELECT 
+  YEAR('2023-08-20'),   -- 2023
+  MONTH('2023-08-20'),  -- 8
+  WEEK('2023-08-20'),   -- 33 (ISO 주차)
+  DAY('2023-08-20');    -- 20
+
+✅ 6. 날짜 형식 지정 - DATE_FORMAT, GET_FORMAT
+SELECT 
+  DATE_FORMAT('2023-08-20 20:23:01', '%m/%d/%Y'),   -- '08/20/2023'
+  DATE_FORMAT('2023-08-20 20:23:01', '%Y%m%d'),     -- '20230820'
+  DATE_FORMAT('2023-08-20 20:23:01', '%Y.%m.%d'),   -- '2023.08.20'
+  DATE_FORMAT('2023-08-20 20:23:01', '%H:%i:%s');   -- '20:23:01'
+
+📌 GET_FORMAT()은 국가/지역별 포맷 가져오는 데 사용되지만, 실무에선 거의 안 쓰임.
+
+🧩 보충 팁
+시간 덧셈/뺄셈은 INTERVAL 키워드와 함께 SECOND, MINUTE, HOUR, DAY, MONTH, YEAR 등 사용 가능.
+SELECT DATE_ADD(NOW(), INTERVAL 10 MINUTE); -- 10분 후
+
