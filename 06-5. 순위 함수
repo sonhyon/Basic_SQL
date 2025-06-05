@@ -4,11 +4,21 @@
 SELECT ROW_NUMBER() OVER(ORDER BY AMOUNT DESC) AS NUM, CUSTOMER_ID, AMOUNT
 FROM () AS X;
 
+특징:
+같은 AMOUNT 값이어도 CUSTOMER_ID 등으로 정렬해 고유한 순위를 부여.
+중복 없음.
+
+
 2. RANK()
 동일한 값에는 동일한 순위를 부여하지만, 다음 순위는 건너뜁니다 (즉, "틈"이 생김).
 
 SELECT RANK() OVER(ORDER BY AMOUNT DESC) AS NUM, CUSTOMER_ID, AMOUNT
 FROM () AS X;
+
+특징:
+예: 1, 2, 2, 4 (3번이 건너뜀)
+동점 순위 허용, 다음 순위는 "건너뜀".
+
 
 3. DENSE_RANK()
 동일한 값에는 동일한 순위를 부여하고, 순위를 건너뛰지 않음.
@@ -16,11 +26,20 @@ FROM () AS X;
 SELECT DENSE_RANK() OVER(ORDER BY AMOUNT DESC) AS NUM, CUSTOMER_ID, AMOUNT
 FROM () AS X;
 
+특징:
+예: 1, 2, 2, 3 (순위가 연속됨)
+중복 허용, 다음 순위는 "건너뛰지 않음".
+
+
 4. NTILE(n)
 전체 데이터를 n개의 그룹(버킷)으로 나눠 각 행에 그룹 번호를 부여합니다.
 
 SELECT NTILE(100) OVER(ORDER BY AMOUNT DESC) AS NUM, CUSTOMER_ID, AMOUNT
 FROM () AS X;
+
+특징:
+분위 분석 등에 사용 (ex. 상위 10%, 하위 25% 등).
+
 
 5. PARTITION BY 절
 데이터를 그룹으로 나눠서 각 그룹 내에서 순위를 부여할 때 사용합니다.
@@ -30,3 +49,6 @@ SELECT STAFF_ID,
        CUSTOMER_ID, AMOUNT
 FROM () AS X;
 
+특징:
+STAFF_ID별로 순위를 따로 계산.
+그룹 단위의 순위 매김이 가능.
