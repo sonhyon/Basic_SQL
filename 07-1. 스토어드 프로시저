@@ -1,0 +1,50 @@
+📘 스토어드 프로시저 (Stored Procedure)
+
+✅ 정의
+스토어드 프로시저란?
+일련의 SQL 쿼리를 하나의 함수처럼 묶어 실행할 수 있는 쿼리 집합
+복잡한 로직이나 반복되는 작업을 하나의 프로시저로 저장하여 재사용할 수 있음
+
+✅ 장점
+재사용 가능: 동일한 로직을 여러 곳에서 호출 가능
+보안성: 프로시저 내부 로직을 감출 수 있어 보안에 유리
+일관성 유지: 여러 응용 프로그램에서 동일한 로직을 일관되게 실행 가능
+성능 향상: 서버에서 미리 컴파일되어 실행되므로 일부 경우 빠름
+
+❌ 단점
+속도: 복잡한 계산에서는 다른 프로그래밍 언어에 비해 느릴 수 있음
+호환성: 데이터베이스 제품 간 호환성이 낮음 (예: MySQL ↔ Oracle)
+
+🛠️ 스토어드 프로시저 사용 예시
+📌 1. 생성하기
+DELIMITER $$
+
+CREATE PROCEDURE DOIT_PROC()
+BEGIN
+  DECLARE CUSTOMER_CNT INT;     -- 고객 수 저장 변수
+  DECLARE ADD_NUMBER INT;       -- 추가할 숫자 변수
+
+  SET CUSTOMER_CNT = 0;
+  SET ADD_NUMBER = 100;
+
+  SET CUSTOMER_CNT = (SELECT COUNT(*) FROM CUSTOMER);
+
+  SELECT CUSTOMER_CNT + ADD_NUMBER;
+END $$
+
+DELIMITER ;
+
+🔍 해설:
+DECLARE: 지역 변수 선언
+SET: 변수에 값 할당
+SELECT COUNT(*) FROM CUSTOMER: 고객 테이블에서 고객 수 조회
+DELIMITER $$: 프로시저 내에서 ; 사용을 위해 구분자 변경
+
+📌 2. 호출하기
+CALL DOIT_PROC();
+
+📌 3. 내용 확인하기
+SHOW CREATE PROCEDURE DOIT_PROC;
+
+📌 4. 삭제하기
+DROP PROCEDURE DOIT_PROC;
