@@ -1,36 +1,3 @@
-[스튜어드 프로시저]
-스튜어드 프로시저 : 일련의 쿼리를 마치 하나의 함수처럼 실행하기 위한 쿼리의 집합
-
-장정 : 재사용할 수 있어 편리하다
-단점 : 다른 프로그래밍 언어에 비해 느리다, 다른 제품과 호환성이 낮다
-
-#스토어드 프로시저 생성하기
-DELIMITER $$
-CREATE PROCEDURE DOIT_PROC()
-BEGIN
-  DECLARE CUSTOMER_CNT INT;
-  DECLARE ADD_NUMBER INT;
-
-  SET CUSTOMER_CNT = 0;
-  SET ADD_NUMBER = 100;
-
-  SET CUSTOMER_CNT = (SELECT COUNT(*) FROM CUSTOMER);
-
-  SELECT CUSTOMER_CNT + ADD_NUMBER;
-
-END $$
-DELIMITER;
-
-#스토어드 프로시저 호출하기
-CALL DOIT_PROC();
-
-#스토어드 프로시저 내용 확인하기
-SHOW CREATE PROCEDURE DOIT_PROC;
-
-#스토어드 프로시저 삭제하기
-DROP PROCEDURE DOIT_PROC;
-
-
 [SQL 프로그래밍]
 [IF문]
 SELECT STORE_ID, IF(STORE_ID=1, '일', '이') AS ONE_TWO
