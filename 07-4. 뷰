@@ -1,0 +1,106 @@
+📘 뷰(View)란?
+정의: 데이터베이스에 존재하는 가상의 테이블 (실제 데이터 저장 X)
+
+종류: 단일 뷰, 복합 뷰
+
+장점:
+복잡한 쿼리를 간단히 사용 가능
+보안성 우수 (민감 정보 숨기기 가능)
+
+단점:
+한 번 정의하면 변경 제한
+인덱스 불가, 성능 제한 존재
+
+🛠️ 뷰 생성 및 조회
+-- 단일 뷰 생성
+CREATE VIEW V_CUSTOMER AS
+SELECT FIRST_NAME, LAST_NAME, EMAIL FROM CUSTOMER;
+
+SELECT * FROM V_CUSTOMER;
+
+-- 복합 뷰 (조인 포함)
+CREATE VIEW V_PAYUSER AS
+SELECT FIRST_NAME, LAST_NAME, EMAIL, AMOUNT, ADDRESS_ID
+FROM CUSTOMER AS A
+  INNER JOIN (
+    SELECT CUSTOMER_ID, SUM(AMOUNT) AS AMOUNT
+    FROM PAYMENT
+    GROUP BY CUSTOMER_ID
+  ) AS B ON A.CUSTOMER_ID = B.CUSTOMER_ID;
+
+SELECT * FROM V_PAYUSER;
+
+-- 뷰와 일반 테이블 조인
+SELECT A.*, B.*
+FROM V_PAYUSER AS A
+  INNER JOIN ADDRESS AS B ON A.ADDRESS_ID = B.ADDRESS_ID;
+
+✏️ 뷰 수정
+-- 기존 뷰 수정
+ALTER VIEW V_CUSTOMER AS
+SELECT CUSTOMER_ID, FIRST_NAME, LAST_NAME, EMAIL, ADDRESS_ID
+FROM CUSTOMER;
+
+-- 없으면 생성, 있으면 수정
+CREATE OR REPLACE VIEW V_CUSTOMER AS
+SELECT '뷰가 이미 있으면 수정, 없으면 생성';
+
+🔍 뷰 정보 확인
+DESCRIBE V_PAYUSER;
+SHOW CREATE VIEW V_PAYUSER;
+
+❌ 뷰 삭제
+DROP VIEW V_CUSTOMER;
+DROP VIEW V_PAYUSER;
+
+🧪 뷰를 활용한 데이터 조작
+1. 테이블 및 뷰 생성
+CREATE TABLE TBL_A (COL_1 INT, COL_2 VARCHAR(50));
+CREATE TABLE TBL_B (COL_1 INT, COL_2 VARCHAR(50));
+
+INSERT INTO TBL_A VALUES(1, 'TBL_A_1'), (1, 'TBL_A_2');
+INSERT INTO TBL_B VALUES(1, 'TBL_A_1'), (1, 'TBL_A_2');
+
+CREATE VIEW V_TBL_A AS
+SELECT COL_1, COL_2 FROM TBL_A;
+
+SELECT * FROM V_TBL_A;
+
+2. 단일 뷰 데이터 수정/삽입/삭제
+SET SQL_SAFE_UPDATES = 0;
+
+-- 수정
+UPDATE V_TBL_A SET COL_2 = 'TBL_A 열 수정' WHERE COL_1 = 1;
+
+-- 추가
+INSERT V_TBL_A VALUES (3, 'TBL_A_3');
+
+-- 삭제
+DELETE FROM V_TBL_A WHERE COL_1 = 3;
+
+3. 부분 컬럼만 포함한 뷰
+CREATE VIEW V_TBL_A2 AS SELECT COL_1 FROM TBL_A;
+INSERT V_TBL_A2 VALUES (5);
+
+4. 복합 뷰 생성 및 조작
+CREATE VIEW V_TBL_A_B AS
+SELECT
+  A.COL_1 AS A_COL_1,
+  A.COL_2 AS A_COL_2,
+  B.COL_2 AS B_COL_2
+FROM TBL_A AS A
+  INNER JOIN TBL_B AS B ON A.COL_1 = B.COL_1;
+
+-- 수정
+UPDATE V_TBL_A_B SET A_COL_2 = 'TBL_A 컬럼 수정', B_COL_2 = 'TBL_B 컬럼 수정'
+WHERE A_COL_1 = 1;
+
+-- 추가 (제한이 있을 수 있음)
+INSERT V_TBL_A_B VALUES (3, 'TBL_A_3', 'TBL_B_3');
+
+🗑️ 참조 테이블 삭제 시 주의
+DROP TABLE TBL_A;  -- 참조 테이블 삭제 시 뷰도 오류 발생 가능
+
+✅ 기타
+CHECK TABLE TBL_A_B;  -- 뷰의 무결성 검사 (오타: TABLE_A_B → TBL_A_B)
+
