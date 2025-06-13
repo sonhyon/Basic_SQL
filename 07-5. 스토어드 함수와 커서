@@ -1,0 +1,81 @@
+📌 1. 스토어드 함수 (Stored Function)
+✅ 스토어드 함수란?
+데이터베이스에 저장되는 사용자 정의 함수 (UDF, User Defined Function)
+
+입력값을 받아 하나의 결과값을 반환
+
+SELECT문에서 호출 가능
+
+🔧 함수 생성 전 설정
+MySQL에서는 보안을 위해 기본적으로 함수 생성이 제한되어 있으므로, 설정이 필요함:
+SET GLOBAL LOG_BIN_TRUST_FUNCTION_CREATORS = 1;
+※ 이 설정은 관리자 권한(root)으로 설정해야 함
+
+🧩 스토어드 함수 생성
+USE DOITSQL;  -- 사용할 데이터베이스 선택
+
+DROP FUNCTION IF EXISTS USER_SUM;  -- 함수가 이미 있다면 삭제
+
+DELIMITER $$  -- 구분자 변경 (함수 내부에 세미콜론을 사용하기 위해)
+
+CREATE FUNCTION USER_SUM(NUM_1 INT, NUM_2 INT)
+  RETURNS INT  -- 반환 자료형 지정
+BEGIN
+  RETURN NUM_1 + NUM_2;  -- 함수 본문
+END $$
+
+DELIMITER ;  -- 구분자 원상복귀
+
+▶️ 스토어드 함수 사용
+SELECT USER_SUM(1, 5);  -- 결과: 6
+
+🔍 함수 확인 및 삭제
+내용 확인
+SHOW CREATE FUNCTION USER_SUM;
+
+삭제
+DROP FUNCTION USER_SUM;
+
+📌 2. 커서 (Cursor)
+✅ 커서란?
+SELECT 결과로 나온 **다중 행(Row)**을 하나씩 순차적으로 처리하기 위한 도구
+일반적으로 스토어드 프로시저 내에서 사용됨
+
+🧱 커서 구성 요소
+DECLARE CURSOR: 커서 선언
+OPEN: 커서 열기
+FETCH: 커서에서 한 행씩 읽어오기
+CLOSE: 커서 닫기
+
+📘 커서 사용 예시 (기초 구조)
+DELIMITER $$
+
+CREATE PROCEDURE EXAMPLE_CURSOR()
+BEGIN
+  DECLARE done INT DEFAULT FALSE;
+  DECLARE user_name VARCHAR(100);
+  DECLARE cur CURSOR FOR SELECT name FROM users;
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+  OPEN cur;
+
+  read_loop: LOOP
+    FETCH cur INTO user_name;
+    IF done THEN
+      LEAVE read_loop;
+    END IF;
+    -- 여기에 원하는 작업 수행
+    SELECT user_name;
+  END LOOP;
+
+  CLOSE cur;
+END $$
+
+DELIMITER ;
+
+📝 커서 사용할 때 주의할 점
+반드시 HANDLER로 NOT FOUND 상황을 처리해줘야 함
+커서는 메모리를 차지하므로 CLOSE로 꼭 닫아줘야 함
+반복적으로 데이터를 처리해야 할 때 유용
+
+
