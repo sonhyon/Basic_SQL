@@ -1,45 +1,45 @@
-✅ 1. JOIN (조인)
-🔹 INNER JOIN : 두 테이블에서 일치하는 행만 반환
+1. JOIN (조인)
+- INNER JOIN : 두 테이블에서 일치하는 행만 반환
 SELECT A.FIRST_NAME, B.ADDRESS
 FROM CUSTOMER AS A
 INNER JOIN ADDRESS AS B
 ON A.ADDRESS_ID = B.ADDRESS_ID
 
-🔹 OUTER JOIN
+- OUTER JOIN
 LEFT OUTER JOIN: 왼쪽 테이블의 모든 행 + 일치하는 오른쪽 행
 RIGHT OUTER JOIN: 오른쪽 테이블의 모든 행 + 일치하는 왼쪽 행
 FULL OUTER JOIN: 양쪽 테이블의 모든 행 (일치하지 않으면 NULL)
 
-🔹 CROSS JOIN
+- CROSS JOIN
 모든 조합 반환 (카테시안 곱)
 
-🔹 SELF JOIN
+- SELF JOIN
 같은 테이블을 자기 자신과 조인
 
 
-✅ 2. 서브쿼리 (Subquery)
-🔹 단일행 서브쿼리 : 결과가 1개 값일 때 사용 (=, <, >)
+2. 서브쿼리 (Subquery)
+- 단일행 서브쿼리 : 결과가 1개 값일 때 사용 (=, <, >)
 SELECT * FROM CUSTOMER
 WHERE CUSTOMER_ID = (SELECT CUSTOMER_ID FROM CUSTOMER WHERE FIRST_NAME = 'ROSA');
 
-🔹 다중행 서브쿼리 : 결과가 여러 값일 때 사용 (IN, ANY, ALL 등)
+- 다중행 서브쿼리 : 결과가 여러 값일 때 사용 (IN, ANY, ALL 등)
 WHERE CUSTOMER_ID IN (SELECT CUSTOMER_ID FROM CUSTOMER WHERE FIRST_NAME IN ('ROSA', 'ANA'))
 
-🔹 연산자 활용
+- 연산자 활용
 ANY: 하나라도 만족하면 참
 ALL: 모두 만족해야 참
 EXISTS: 서브쿼리 결과가 존재하는지
 
-✅ 3. 공통 테이블 표현식 (CTE)
-🔹 기본 CTE
+3. 공통 테이블 표현식 (CTE)
+- 기본 CTE
 WITH avg_score AS (
   SELECT AVG(score) AS avg FROM students)
 SELECT * FROM students WHERE score > avg_score.avg;
 
-🔹 CTE + UNION/INTERSECT/EXCEPT
+- CTE + UNION/INTERSECT/EXCEPT
 여러 SELECT 결과를 합집합, 교집합, 차집합으로 처리
 
-🔹 재귀 CTE : 반복적으로 값을 생성할 때 사용 (예: 피보나치 수열)
+- 재귀 CTE : 반복적으로 값을 생성할 때 사용 (예: 피보나치 수열)
 WITH RECURSIVE FIBONACCI_NUMBER (N, FIBONACCI_N, NEXT_FIBONACCI_N) AS (
   SELECT 1, 0, 1
   UNION ALL
@@ -49,7 +49,7 @@ WITH RECURSIVE FIBONACCI_NUMBER (N, FIBONACCI_N, NEXT_FIBONACCI_N) AS (
 )
 SELECT * FROM FIBONACCI_NUMBER;
 
-✅ 기타 정리 포인트
+- 기타 정리 포인트
 FROM 절의 서브쿼리: 쿼리 결과를 테이블처럼 사용
 SELECT 절의 서브쿼리: 열 계산을 위해 서브쿼리 사용 가능
 
