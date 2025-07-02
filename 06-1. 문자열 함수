@@ -1,13 +1,13 @@
-✅ 문자열 연결 함수
-CONCAT(a, b, ...)
+- 문자열 연결 함수
+SELECT CONCAT('Hello', NULL, 'World');  -- 결과: NULL
 여러 문자열을 연결함. 단, 인수 중 하나라도 NULL이면 결과는 NULL.
 
-CONCAT_WS(separator, a, b, ...)
+SELECT CONCAT_WS('-', '2023', NULL, '07', '02');  -- 결과: '2023-07-02'
 구분자를 지정해 문자열을 연결함. NULL 값은 무시하고 건너뜀.
 
-✅ 데이터 형 변환 함수 (CAST, CONVERT)
+- 데이터 형 변환 함수 (CAST, CONVERT)
 CAST(값 AS 데이터형) 또는 CONVERT(값, 데이터형)
-값을 다른 데이터형으로 변환할 수 있음.
+값을 다른 데이터형으로 변환할 수 있음
 사용 가능한 데이터형 예시: CHAR, DATE, SIGNED, UNSIGNED, DECIMAL, TIME, JSON 등
 
 예시)
@@ -16,59 +16,60 @@ CAST(20230819 AS DATE) → 숫자를 날짜로
 CONVERT(20230819, CHAR(5)) → 문자 길이를 지정해 변환
 CAST(9223372036854775807 AS UNSIGNED) + 1 → 정수 오버플로 방지
 
-✅ NULL 처리 함수
+- NULL 처리 함수
 IFNULL(a, b)
 a가 NULL이면 b를 반환함.
 
 COALESCE(a, b, c, ...)
 왼쪽부터 NULL이 아닌 첫 번째 값을 반환함. 모든 값이 NULL이면 NULL 반환.
 
-✅ 대소문자 변환 함수
+- 대소문자 변환 함수
 LOWER(문자열) → 소문자로 변환
 UPPER(문자열) → 대문자로 변환
 
-✅ 공백 제거 함수
+- 공백 제거 함수
 LTRIM(문자열) → 왼쪽 공백 제거
 RTRIM(문자열) → 오른쪽 공백 제거
 TRIM(BOTH '문자' FROM 문자열) → 양쪽 특정 문자 제거
 예: TRIM(BOTH '#' FROM '# Hello #') → Hello
 
-✅ 문자열 길이 확인
+- 문자열 길이 확인
 LENGTH(문자열)
 바이트 기준 길이 반환 (영문자 1, 한글은 2~3)
 
 CHAR_LENGTH(문자열)
 문자 개수 기준 길이 반환 (한글 1자도 1로 계산)
 
-✅ 특정 문자 위치 찾기
+- 특정 문자 위치 찾기
 POSITION(찾을문자 IN 문자열)
 해당 문자가 처음 나오는 위치를 반환함. 없으면 0 반환
 
-✅ 문자열 잘라내기
+- 문자열 잘라내기
 SUBSTRING(문자열, 시작위치, 길이)
 특정 위치부터 문자열을 자름.
 
-활용 예시
+(활용 예시)
 이메일에서 아이디만 추출:
 SUBSTRING('abc@email.com', 1, POSITION('@' IN 'abc@email.com') - 1)
+= SUBSTRING('abc@email.com', 1, 3)
 
-✅ 문자열 치환
+- 문자열 치환
 REPLACE(문자열, 찾을문자, 바꿀문자)
 문자열 내 특정 문자를 다른 문자로 바꿈
 
-✅ 문자열 반복
+- 문자열 반복
 REPEAT(문자열, 반복횟수)
 해당 문자열을 반복해서 출력함
 
-✅ 공백 문자 생성
+- 공백 문자 생성
 SPACE(숫자)
 지정한 수만큼의 공백 문자열 생성
 → CONCAT(FIRST_NAME, SPACE(10), LAST_NAME)
 
-✅ 문자열 역순 출력
+- 문자열 역순 출력
 REVERSE(문자열)
-문자열을 뒤집어서 출력함.
+문자열을 뒤집어서 출력함
 
-✅ 문자열 비교
+- 문자열 비교
 STRCMP(문자열1, 문자열2)
 두 문자열이 같으면 0, 다르면 -1 또는 1 반환.
