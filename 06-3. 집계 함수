@@ -1,4 +1,4 @@
-✅ 조건에 맞는 데이터 개수 세기 – COUNT()
+1. 조건에 맞는 데이터 개수 세기 – COUNT()
 -- 전체 고객 수
 SELECT COUNT(*) FROM CUSTOMER;
 
@@ -20,9 +20,9 @@ FROM ADDRESS;
 SELECT COUNT(*), COUNT(STORE_ID), COUNT(DISTINCT STORE_ID) 
 FROM CUSTOMER;
 
-📌 COUNT(컬럼명)은 NULL을 제외하고 개수를 세고, COUNT(*)는 NULL 포함 전체 행 수를 셉니다.
+COUNT(컬럼명)은 NULL을 제외하고 개수를 세고, COUNT(*)는 NULL 포함 전체 행 수를 셉니다.
 
-✅ 합계 구하기 – SUM()
+2. 합계 구하기 – SUM()
 -- 전체 결제 금액의 합
 SELECT SUM(AMOUNT) 
 FROM PAYMENT;
@@ -32,7 +32,7 @@ SELECT CUSTOMER_ID, SUM(AMOUNT)
 FROM PAYMENT 
 GROUP BY CUSTOMER_ID;
 
-✅ 평균 구하기 – AVG()
+3. 평균 구하기 – AVG()
 -- 전체 결제 금액 평균
 SELECT AVG(AMOUNT) 
 FROM PAYMENT;
@@ -42,7 +42,7 @@ SELECT CUSTOMER_ID, AVG(AMOUNT)
 FROM PAYMENT 
 GROUP BY CUSTOMER_ID;
 
-✅ 최소값과 최대값 구하기 – MIN(), MAX()
+4. 최소값과 최대값 구하기 – MIN(), MAX()
 -- 전체 결제 금액의 최소값과 최대값
 SELECT MIN(AMOUNT), MAX(AMOUNT) 
 FROM PAYMENT;
@@ -52,14 +52,14 @@ SELECT CUSTOMER_ID, MIN(AMOUNT), MAX(AMOUNT)
 FROM PAYMENT 
 GROUP BY CUSTOMER_ID;
 
-✅ 부분합과 총합 구하기 – ROLLUP
+5. 부분합과 총합 구하기 – ROLLUP
 SELECT CUSTOMER_ID, STAFF_ID, SUM(AMOUNT)
 FROM PAYMENT
 GROUP BY CUSTOMER_ID, STAFF_ID WITH ROLLUP;
 
-📌 ROLLUP은 위에서부터 그룹별 합계를 만들고 마지막에 전체 총합을 만들어줍니다.
+ROLLUP은 위에서부터 그룹별 합계를 만들고 마지막에 전체 총합을 만들어줍니다.
 
-✅ 표준편차 구하기 – STDDEV(), STDDEV_SAMP()
+6. 표준편차 구하기 – STDDEV(), STDDEV_SAMP()
 SELECT STDDEV(AMOUNT), STDDEV_SAMP(AMOUNT) 
 FROM PAYMENT;
 
