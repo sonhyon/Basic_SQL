@@ -1,12 +1,12 @@
-🔢 1. 절대값 함수 - ABS()
+1. 절대값 함수 - ABS()
 SELECT ABS(-1.0), ABS(0.0), ABS(1.0);
 -- 결과: 1.0, 0.0, 1.0
 
-➕➖ 2. 부호 판단 함수 - SIGN()
+2. 부호 판단 함수 - SIGN()
 SELECT SIGN(-256), SIGN(0), SIGN(256);
 -- 결과: -1, 0, 1
 
-🔼🔽 3. 천장값, 바닥값 함수 - CEILING(), FLOOR()
+3. 천장값, 바닥값 함수 - CEILING(), FLOOR()
 CEILING(): 소수점 올림
 FLOOR(): 소수점 내림
 
@@ -14,33 +14,33 @@ SELECT CEILING(2.4), CEILING(-2.4), CEILING(0.0);
 SELECT FLOOR(2.4), FLOOR(-2.4), FLOOR(0.0);
 -- 결과: 3, -2, 0 | 2, -3, 0
 
-🔄 4. 반올림 함수 - ROUND()
+4. 반올림 함수 - ROUND()
 SELECT ROUND(99.9994, 3), ROUND(99.9995, 3);  -- 소수 셋째 자리
 SELECT ROUND(234.4545, 2), ROUND(234.4545, -2);  -- -2는 100단위로 반올림
 -- 결과: 99.999, 100.000 | 234.45, 200
 
-📉 5. 로그 함수 - LOG()
+5. 로그 함수 - LOG()
 SELECT LOG(10);        -- 자연로그
 SELECT LOG(10, 5);     -- 밑 5 로그
 
-🧮 6. 지수 함수 - EXP()
+6. 지수 함수 - EXP()
 SELECT EXP(1.0);       -- e^1
 SELECT EXP(10);        -- e^10
 SELECT EXP(LOG(20), LOG(EXP(20)));  -- 잘못된 문법 가능성 있음 (괄호 확인)
 
-✴️ 7. 거듭제곱 함수 - POWER()
+7. 거듭제곱 함수 - POWER()
 SELECT POWER(2, 3), POWER(2, 10), POWER(2.0, 3);
 -- 결과: 8, 1024, 8.0
 
-📐 8. 제곱근 함수 - SQRT()
+8. 제곱근 함수 - SQRT()
 SELECT SQRT(1.00), SQRT(10.00);
 -- 결과: 1.0, 3.1622...
 
-🎲 9. 난수 함수 - RAND()
+9. 난수 함수 - RAND()
 SELECT RAND(100), RAND(), RAND();
 -- 결과는 실행할 때마다 달라짐
 
-📏 10. 삼각 함수 - COS(), SIN(), TAN(), ATAN()
+10. 삼각 함수 - COS(), SIN(), TAN(), ATAN()
 SELECT COS(14.78);
 SELECT SIN(45.175643);
 SELECT TAN(PI()/2), TAN(0.45);
